@@ -7,3 +7,6 @@ services:
 before_install:
   # Added Tag for otherwise imageId will be generated-used within travis ci
   - docker build -t rossferreira/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true rossferreira/docker-react npm run test
