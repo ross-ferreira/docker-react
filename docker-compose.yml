@@ -1,0 +1,25 @@
+version: '3'
+services:
+# container 1
+  web:
+    stdin_open: true
+    build: 
+    # Using build context since Dockerfile.dev isnt convention and couldnt be found automatically when building
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      # Map the current folder outside of the container to the app folder inside of the container
+      - .:/app
+# container 2
+  tests: 
+    stdin_open: true
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes: 
+      - /app/node_modules
+      - .:/app
+    command: ["npm","run","test"]
