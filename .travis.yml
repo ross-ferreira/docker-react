@@ -1,0 +1,9 @@
+# Getting permissions
+sudo: required
+# Get Copy of Docker ready
+services: 
+  - docker
+
+before_install:
+  # Added Tag for otherwise imageId will be generated-used within travis ci
+  - docker build -t rossferreira/docker-react -f Dockerfile.dev .
