@@ -1,3 +1,5 @@
+language: generic
+
 # Getting permissions
 sudo: required
 # Get Copy of Docker ready
@@ -10,3 +12,18 @@ before_install:
 
 script:
   - docker run -e CI=true rossferreira/docker-react npm run test
+
+deploy: 
+  provider: elasticbeanstalk
+  region: "eu-west-2"
+  app: "docker-react"
+  env: "Dockerreact-env"
+  bucket_name: "elasticbeanstalk-eu-west-2-252383048810"
+  bucket_path: "docker-react"
+  # Only deply changes to Master Branch
+  on: 
+    branch: master
+  # Keys will come from local env
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: "$AWS_SECRET_KEY"
