@@ -9,4 +9,6 @@ RUN npm run build
 
 # 2.Run Phase
 FROM nginx
+# This will expose port 80 when being mapped by elastic beanstalk
+EXPOSE 80
 COPY --from=0 /app/build /usr/share/nginx/html
